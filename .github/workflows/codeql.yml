@@ -1,0 +1,20 @@
+name: "CodeQL workflow"
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+  repository_dispatch:
+    types: code-scanning
+
+permissions:
+  security-events: write
+  packages: read
+  actions: read
+  contents: read
+
+jobs:
+  codeql:
+    name: 'codeql'
+    uses: Webjet/workflows/.github/workflows/codeql.yml@v1

@@ -1,0 +1,28 @@
+name: Build & Test
+on:
+  push:
+    branches:
+      - '**'
+      - '!main'
+
+env:
+  NAMESPACE: namespace
+  IMAGENAME: imagename
+
+jobs:
+  pipeline:
+    runs-on: [webjet, linux]
+    steps:
+      - name: Checkout
+        uses: webjet/action-checkout@v1
+
+      - name: init k8s
+        uses: webjet/action-kubernetes-init@v1
+        with:
+          env-json-base64: ${{ secrets.JSONDATA64 }}
+
+      - name: Build Image
+        uses: webjet/action-build-image@v1
+        with:
+          dockerfile-path: 'Dockerfile'
+          push: false

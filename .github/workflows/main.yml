@@ -1,0 +1,62 @@
+name: Webjet Kubenetes Deployment
+on:
+  push:
+    branches: [main]
+  repository_dispatch:
+    types: image-rebuild    
+
+env:
+  NAMESPACE: namespace
+  IMAGENAME: imagename
+
+jobs:
+  pipeline:
+    runs-on: [webjet, linux]
+    steps:
+      - name: Checkout
+        uses: webjet/action-checkout@v1
+
+      - name: init k8s
+        uses: webjet/action-kubernetes-init@v1
+        with:
+          env-json-base64: ${{ secrets.JSONDATA64 }}
+
+      # - uses: webjet/action-msteams@v1
+      #   with:
+      #     webhook-uri: ${{ secrets.WEBHOOK_URL }}
+      #     card-layout-start: complete
+      #     include-files: false
+
+      - name: Build Image
+        uses: webjet/action-build-image@v1
+        with:
+          dockerfile-path: 'Dockerfile'
+          push: false # set to true on the project
+
+      # - name: Deploy DEV AU
+      #   uses: webjet/action-kubebot-deploy@v1
+      #   with:
+      #     environment: dev
+      #     service: ${{ env.IMAGENAME }}-wjau
+      #     manifest: pipeline/dev-wjau.yaml
+
+      # - name: Deploy DEV NZ
+      #   uses: webjet/action-kubebot-deploy@v1
+      #   with:
+      #     environment: dev
+      #     service: ${{ env.IMAGENAME }}-wjnz
+      #     manifest: pipeline/dev-wjnz.yaml
+
+      # - name: Deploy PROD AU
+      #   uses: webjet/action-kubebot-deploy@v1
+      #   with:
+      #     environment: prod
+      #     service: ${{ env.IMAGENAME }}-wjau
+      #     manifest: pipeline/prod-wjau.yaml
+
+      # - name: Deploy PROD NZ
+      #   uses: webjet/action-kubebot-deploy@v1
+      #   with:
+      #     environment: prod
+      #     service: ${{ env.IMAGENAME }}-wjnz
+      #     manifest: pipeline/prod-wjnz.yaml
