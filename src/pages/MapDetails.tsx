@@ -38,7 +38,7 @@ const MapDetails: React.FC = () => {
     window.location.href = '/welcome';
   }
 
-  const backendUrl = `${Config.BACKEND_URL}/Gallery/details?id=ec445664-f5ce-4b6c-be04-17ce65432382'
+  const backendUrl = `${Config.BACKEND_URL}/Gallery/details?id=ec445664-f5ce-4b6c-be04-17ce65432382`
 
   const loadImages = () => {
     const getData = async () => {
