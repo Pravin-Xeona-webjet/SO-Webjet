@@ -42,16 +42,24 @@ body {
 .main-page {
   display: flex;
   flex-direction: column;
+  height: 100%;
 
   & > div {
     flex: 1 1 auto;
+  }
+
+  footer {
+    flex: 0 0 100px;
+  }
+
+  header {
+    flex: 0 0 80px;
   }
 }
 
 footer {
   position: sticky;
   bottom: 0;
-  height: 100px;
   display: flex;
   background: @grey;
   padding: 12px;
@@ -75,27 +83,35 @@ footer {
   }
 }
 
-.ReactGridGallery_custom-overlay {
-  position: relative;
-  & > div {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    padding: 6px;
+.image-modal {
+  img {
+    width: 100%;
+  }
 
-    svg:first-child {
-      position: relative;
-      top: 5px;
-      width: 32px;
-      height: 32px;
-      margin-right: 6px;
+  [role="modal-body"] {
+    & > div {
+      display: flex;
+      padding: 12px;
+      justify-content: end;
     }
 
-    svg:last-child {
-      fill: @white;
-      width: 24px;
-      height: 24px;
+    & > span {
+      display: block;
+      line-height: 30px;
+      font-size: 16px;
     }
   }
-}
 
+  svg:first-child {
+    width: 36px;
+    height: 36px;
+    margin-right: 6px;
+  }
+
+  svg:last-child {
+    position: relative;
+    width: 28px;
+    height: 28px;
+    top: 4px;
+  }
+}
