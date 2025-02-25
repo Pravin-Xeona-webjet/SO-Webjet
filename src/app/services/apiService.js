@@ -9,16 +9,6 @@ export const callApi = (endpoint, method = 'GET', data = null, withCredentials =
   }
 
   const options = {
-    retryDelay: 1000,
-    retryOn: (attempt, error, response) => {
-      // retry on any network error, or 5xx status codes
-      if (attempt < 3 && (error !== null || response.status >= 500)) {
-        logger.warning({ message: `fetch retry, attempt number ${attempt + 1}.`, source: 'apiRetryInfo', data: endpoint })
-        return true
-      }
-      return false
-    },
-    credentials: withCredentials ? 'include' : 'same-origin',
     method,
     headers: {
       Accept: 'application/json',
@@ -29,6 +19,8 @@ export const callApi = (endpoint, method = 'GET', data = null, withCredentials =
 
   return fetch(endpoint, options)
     .then(response => {
+      console.log(response)
+
       const contentType = response.headers.get('content-type')
       return contentType && contentType.indexOf('application/json') !== -1
         ? response.json().then(json => {

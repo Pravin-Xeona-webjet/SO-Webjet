@@ -7,19 +7,19 @@ const Footer = () => {
   return (
     <footer>
       <a href='/#/posts'>
-        <IconPhotos fill='#dc140a' size='32' />
+        <IconPhotos fill='white' size='32' />
         <span>Photos</span>
       </a>
       <a href='/#/map'>
-        <IconMapPin fill='#dc140a' size='32' />
+        <IconMapPin fill='white' size='32' />
         <span>Map</span>
       </a>
       <a href='/#/bucketlist'>
-        <FaBookmark fill='#dc140a' size='32' />
+        <FaBookmark fill='white' size='32' />
         <span>Bucket List</span>
       </a>
       <a href='/#/explore'>
-        <FaHome fill='#dc140a' size='32' />
+        <FaHome fill='white' size='32' />
         <span>Explore</span>
       </a>
     </footer>

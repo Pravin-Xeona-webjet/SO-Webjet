@@ -32,6 +32,7 @@ header {
 
 body {
   height: 100vh;
+  background: white;
 }
 
 #content, #root {
@@ -41,7 +42,6 @@ body {
 .main-page {
   display: flex;
   flex-direction: column;
-  height: 100%;
 
   & > div {
     flex: 1 1 auto;
@@ -49,6 +49,8 @@ body {
 }
 
 footer {
+  position: sticky;
+  bottom: 0;
   height: 100px;
   display: flex;
   background: @grey;
@@ -84,7 +86,6 @@ footer {
     svg:first-child {
       position: relative;
       top: 5px;
-      fill: @white;
       width: 32px;
       height: 32px;
       margin-right: 6px;
