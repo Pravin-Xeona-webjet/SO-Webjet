@@ -1,31 +1,100 @@
 @import 'utilities.less';
 
 // layout
-#content-wrapper {
-  #side-bar {
-    width: auto;
+header {
+  display: flex;
+  background: @grey;
+  padding: 12px;
+  justify-content: space-between;
+  align-items: center;
+
+  .user-name {
+    color: @white;
+    font-size: 24px;
+    padding-right: 12px;
   }
 
-  header {
-    background: @primaryRed;
+  & > div {
+    display: flex;
+    align-items: center;
+  }
+
+  & > h1 {
+    color: @white;
+  }
+
+  svg {
+    fill: @primaryRed;
+    width: 32px;
+    height: 32px;
   }
 }
 
-#content {
-  margin: @gutterWidth
+body {
+  height: 100vh;
 }
 
-#contact-form {
-  width: 450px;
+#content, #root {
+  height: 100%;
 }
 
-form {
-  .field {
-    padding-bottom: 14px;
+.main-page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  & > div {
+    flex: 1 1 auto;
   }
+}
 
-  .action-panel {
-    float: right;
+footer {
+  height: 100px;
+  display: flex;
+  background: @grey;
+  padding: 12px;
+  justify-content: space-between;
+  align-items: center;
+
+  & > a {
+    display: inline-flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    color: @white;
+    font-size: 24px;
+
+    &:hover, &:focus, &:visited {
+      text-decoration: none;
+      outline: none;
+      color: @white;
+    }
+  }
+}
+
+.ReactGridGallery_custom-overlay {
+  position: relative;
+  & > div {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 6px;
+
+    svg:first-child {
+      position: relative;
+      top: 5px;
+      fill: @white;
+      width: 32px;
+      height: 32px;
+      margin-right: 6px;
+    }
+
+    svg:last-child {
+      fill: @white;
+      width: 24px;
+      height: 24px;
+    }
   }
 }
 

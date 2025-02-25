@@ -1,19 +1,45 @@
 import React from 'react'
-import { HashRouter, Routes, Route } from 'react-router-dom'
+import {
+  createHashRouter,
+  RouterProvider
+} from 'react-router-dom'
 import Main from 'components/Main'
-import Counter from 'components/Counter'
-import Form from 'components/Form'
+import Posts from 'components/Posts'
+import Map from 'components/Map'
+import BucketList from 'components/BucketList'
+import Home from 'components/Home'
 
 export default function App () {
-  // use BroserRouter to replace HashRouter if you don't need # in the URL
-  return (
-    <HashRouter>
-      <Routes>
-        <Route path='/counter' element={<Counter />} />
-        <Route path='/form' element={<Form />} />
-        <Route path='/*' element={<Main />} />
-      </Routes>
-    </HashRouter>
+  const router = createHashRouter([
+    {
+      path: '/',
+      element: <Main />,
+      children: [
+        {
+          path: '/posts',
+          element: <Posts />
+        },
+        {
+          path: '/map',
+          element: <Map />
+        },
+        {
+          path: '/bucketlist',
+          element: <BucketList />
+        },
+        {
+          path: '/explore',
+          element: <Home />
+        },
+        {
+          element: <Home />,
+          index: true
+        }
+      ]
+    }
+  ])
 
+  return (
+    <RouterProvider router={router} />
   )
 }
