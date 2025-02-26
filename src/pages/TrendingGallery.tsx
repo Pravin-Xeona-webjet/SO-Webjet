@@ -119,12 +119,14 @@ const TrendingGallery: React.FC = () => {
           <Masonry>
             {images.map((image, i) => (
               <div>
+                <a href={`/details/${image.id}`}>
                 <img
                   key={i}
                   src={image.src}
                   style={{ width: "100%", display: "block" }}
                   alt=""
                 />
+                </a>
                 <div className="overlay">
                   <IonIcon aria-hidden="true" size='large' color='light' icon={heart} onClick={() => RateImage(image.id)} />
                   <IonIcon aria-hidden="true" size='large' color='light' icon={bookmark} onClick={() => BookmarkImage(image.id)} />

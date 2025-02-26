@@ -84,7 +84,7 @@ const Map: React.FC = () => {
     <IonPage>
       <SiteHeader />
       <IonContent fullscreen>
-        <MapContainer center={[latitude, longitude]} zoom={6} minZoom={4} maxZoom={8} scrollWheelZoom={true}>
+        <MapContainer center={[latitude, longitude]} zoom={6} minZoom={4} maxZoom={12} scrollWheelZoom={true}>
           <ComponentResize />
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
