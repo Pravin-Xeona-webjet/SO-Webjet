@@ -13,7 +13,7 @@ const Posts = () => {
 
   const handleLike = async (imageId) => {
     try {
-      const response = await fetch(`'https://sowebjet-a6crdfc4dzh2hver.australiasoutheast-01.azurewebsites.net/api/Gallery/rate?id=${imageId}&likeIt=true'`, {
+      const response = await fetch(`https://sowebjet-a6crdfc4dzh2hver.australiasoutheast-01.azurewebsites.net/api/Gallery/rate?id=${imageId}&likeIt=true`, {
         method: 'POST'
       })
       if (!response.ok) {
