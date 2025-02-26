@@ -1,0 +1,21 @@
+ion-grid {
+  text-align: center;
+  margin: auto;
+  max-width: 500px;
+  position: relative;
+  top: 200px;
+}
+
+ion-row {
+  justify-content: center;
+}
+
+ion-content {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+ion-button {
+  width: 100%;
+}

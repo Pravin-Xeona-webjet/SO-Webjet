@@ -2,6 +2,7 @@ import { IonButton, IonCardTitle, IonCol, IonContent, IonGrid, IonHeader, IonIco
 import { person } from 'ionicons/icons';
 import { useState } from 'react';
 import * as Config from '../constants';
+import './Login.css';
 
 const Login: React.FC = () => {
     const [email, setEmail] = useState<string>("jose@webjet.com.au");
@@ -40,13 +41,6 @@ const Login: React.FC = () => {
         <IonGrid>
             <IonRow>
                 <IonCol size="10">
-                    <IonRow>
-                        <IonIcon
-                            color='primary'
-                            style={{ fontSize: '70px' }}
-                            icon={person}
-                        />
-                    </IonRow>
                     <IonRow>
                         <IonCol>
                             <IonItem>
