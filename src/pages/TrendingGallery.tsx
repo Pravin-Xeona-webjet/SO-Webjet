@@ -96,7 +96,7 @@ const TrendingGallery: React.FC = () => {
         ),
         tags: image.tags,
         score: image.score
-      }));
+      })).sort((a: any) => a.score);
       setImages(images);
     };
 

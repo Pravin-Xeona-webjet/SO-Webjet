@@ -2,11 +2,12 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, useIonViewDidEnte
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import SiteHeader from '../components/SiteHeader';
-import { useState } from 'react';
-import MapHighlight from '../components/MapHighlight';
+import { useEffect, useState } from 'react';
+import MapAirport from '../components/MapAirport';
 import './MapDetails.css'
-import { useParams } from 'react-router';
+import { RouteComponentProps, useParams } from 'react-router';
 import * as Config from '../constants';
+import MapAttraction from '../components/MapAttraction';
 
 const ComponentResize = () => {
   const map = useMap();
@@ -18,29 +19,33 @@ const ComponentResize = () => {
   return null;
 };
 
-/*
-const MoveTo = ({ coords }) => {
+const RecenterAutomatically = ({lat,lng}) => {
   const map = useMap();
-  map.setView(coords, map.getZoom());
-  return null;
-}
-*/
+   useEffect(() => {
+     map.setView([lat, lng]);
+   }, [lat, lng]);
+   return null;
+ }
 
-const MapDetails: React.FC = () => {
-  const params = useParams(); 
-
-  const [images, setImages] = useState<any[]>([])
-  const [latitude, setLatitude] = useState(-33.908079)
-  const [longitude, setLongitude] = useState(151.211322)
+interface MapDetailPageProps
+  extends RouteComponentProps<{
+    id: string;
+  }> {}
+  
+const MapDetails: React.FC<MapDetailPageProps> = ({match}) => {
+  const [attraction, setAttraction] = useState<any>({})
+  const [airport, setAirport] = useState<any>({})
+  const [latitude, setLatitude] = useState(0)
+  const [longitude, setLongitude] = useState(0)
   let jwt = localStorage.getItem('jwt');
   if (!jwt) {
     jwt = '';
     window.location.href = '/welcome';
   }
 
-  const backendUrl = `${Config.BACKEND_URL}/Gallery/details?id=ec445664-f5ce-4b6c-be04-17ce65432382`
-
+  const backendUrl = `${Config.BACKEND_URL}/Gallery/details?id=${match.params.id}`
   const loadImages = () => {
+    console.log('Loading data');
     const getData = async () => {
       const response = await fetch(backendUrl, {
         method: 'GET',
@@ -55,7 +60,7 @@ const MapDetails: React.FC = () => {
       }
       const data = await response.json();
       
-      const connection = {
+      const airport = {
         'id': 'missing-data-to-add',
         'src': '/assets/airport.jpg',
         'name': data.connectionPort.type,
@@ -70,10 +75,12 @@ const MapDetails: React.FC = () => {
         'position': [data.latitude, data.longitude]
       };
 
-      setImages([connection, attraction]);
+      setAirport(airport);
+      setAttraction(attraction);
     };
 
     getData().then(() => {
+      console.log('Data loaded');
     }).catch(error => {
       console.error('There was a problem with the fetch operation:', error);
     });
@@ -83,28 +90,34 @@ const MapDetails: React.FC = () => {
     loadImages();
   });
 
-  useIonViewWillLeave(() => {
-    console.log('Leaving MapDetails');
-  });
-
-
   return (
     <IonPage>
       <SiteHeader />
       <IonContent fullscreen>
-        <MapContainer center={[latitude, longitude]} zoom={6} minZoom={4} maxZoom={8} scrollWheelZoom={true}>
+        <MapContainer center={[latitude, longitude]} zoom={8} minZoom={4} maxZoom={10} scrollWheelZoom={true}>
           <ComponentResize />
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          {images.map((image) => (
-            <Marker key={`marker-${image.id}`} position={image.position}>
+
+          {airport.position && (
+            <Marker key={`marker-${airport.id}`} position={airport.position}>
               <Popup>
-                <MapHighlight image={image} />
+                <MapAirport info={airport} />
               </Popup>
             </Marker>
-          ))}
+          )}
+
+          {attraction.position && (
+            <Marker key={`marker-${attraction.id}`} position={attraction.position}>
+              <Popup>
+                <MapAttraction info={attraction} />
+              </Popup>  
+            </Marker>
+          )}
+
+          {attraction.position && <RecenterAutomatically lat={attraction.position[0]} lng={attraction.position[1]} />}
         </MapContainer>
       </IonContent>
     </IonPage>

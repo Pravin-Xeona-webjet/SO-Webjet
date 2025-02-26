@@ -5,21 +5,15 @@ import { person } from 'ionicons/icons';
 import { useState } from 'react';
 import Login from '../components/Login';
 
-const login = () => {
-    //const errors = validateForm(fields);
-    //setErrors(errors);
-    //if (!errors.length) {
-    //  Submit your form here
-    //}
-}
-
 const Welcome: React.FC = () => {
-    return (
-        <IonPage>
-            <SiteHeader />
-            <Login />
-        </IonPage >
-    );
+  return (
+    <IonPage>
+      <SiteHeader />
+      <IonContent fullscreen style={{ '--background': 'url(/assets/welcome.jpg) no-repeat center center fixed', '--background-size': 'cover' }}>
+        <Login />
+      </IonContent>
+    </IonPage >
+  );
 };
 
 export default Welcome;

@@ -71,13 +71,12 @@ const App: React.FC = () => {
             <Route exact path="/map">
               <Map />
             </Route>
-            <Route path="/details">
-              <MapDetails />
+            <Route path="/details/:id" component={MapDetails} >
             </Route>
-            <Route path="/bucket-list">
+            <Route exact path="/bucket-list">
               <BucketList />
             </Route>
-            <Route path="/welcome">
+            <Route exact path="/welcome">
               <Welcome />
             </Route>
             <Route exact path="/">
