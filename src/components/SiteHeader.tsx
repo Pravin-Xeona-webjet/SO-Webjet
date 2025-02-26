@@ -7,8 +7,6 @@ const SiteHeader: React.FC = () => {
             <IonToolbar color={"primary"}>
             <IonButtons>
                 <IonTitle>SO Webjet</IonTitle>
-                <IonButtons slot="end"></IonButtons>
-                <IonButton>Home</IonButton>
             </IonButtons>
         </IonToolbar>
       </IonHeader >
